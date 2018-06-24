@@ -1,6 +1,6 @@
 ## link to demo
 
-[Demo](https://anand10parmar.github.io/ng5/).
+[Demo](https://anand10parmar.github.io/angular5/).
 
 # Ng5
 s

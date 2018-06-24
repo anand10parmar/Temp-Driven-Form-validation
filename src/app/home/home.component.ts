@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {trigger,style,transition,animate,keyframes,query,stagger} from '@angular/animations';
 import { DataService } from '../data.service';
+import { NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -44,6 +45,8 @@ goals=[];
     this._data.changeGoal(this.goals);
   }
   addItem(){
+
+
     this.goals.push(this.goalText);
     this.goalText = '';
     this.itemCount = this.goals.length;
