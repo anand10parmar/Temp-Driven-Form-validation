@@ -1,0 +1,41 @@
+.container {
+  margin-top: 30px;
+}
+
+input.ng-invalid.ng-dirty{
+  border-left: 4px solid indianred;
+}
+
+input.ng-valid{
+  border-left: 4px solid green;
+}
+
+.answer{
+  background-color: darkgray;
+  color: white;
+}
+
+.glyphicon-ok{
+  color: green;
+}
+
+.glyphicon-remove{
+  color: indianred;
+}
+
+.container{
+  background-color: lightskyblue;
+  color: white;
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px #888888;
+}
+
+textarea{
+  color: black;
+}
+label{
+  font-size: medium;
+}
+
+

@@ -1,7 +1,113 @@
-<p>
-<a href="" (click)="sendMeHome()"><strong>take me back</strong></a>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-</p>
-<ul>
-  <li *ngFor="let goal of goals">{{ goal }}</li>
-  </ul>
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <h1>Template Driven Form</h1>
+      <form (ngSubmit) = "onSubmit()" #f="ngForm">
+        <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
+          <div class="form-group has-feedback">
+
+            <label for="name">Name</label>
+
+
+            <input type="text"
+                   id="name"
+                   pattern="^[a-zA-Z]+$"
+                   ngModel
+                   #name = "ngModel"
+                   required
+                   name="name"
+                   class="form-control">
+            <i *ngIf="name.valid" class="glyphicon glyphicon-ok form-control-feedback"></i>
+            <i *ngIf="name.invalid && name.dirty" class="glyphicon glyphicon-remove form-control-feedback"></i>
+            <span class="help-block alert alert-danger" *ngIf="name.invalid && name.dirty"> Please enter valid name!</span>
+          </div>
+          <button class="btn btn-primary" type="button" (click)="suggestUserName()">Suggest an Username</button>
+          <div class="form-group has-feedback">
+            <label for="email">Mail</label>
+
+
+            <input type="email"
+                   id="email"
+                   ngModel
+                   name="email"
+                   email
+                   required
+                   #email="ngModel"
+                   class="form-control"
+            >
+            <i *ngIf="email.valid" class="glyphicon glyphicon-ok form-control-feedback"></i>
+            <i *ngIf="email.invalid && email.dirty" class="glyphicon glyphicon-remove form-control-feedback"></i>
+            <span class="help-block alert alert-danger" *ngIf="email.invalid && email.dirty"> Please enter valid email!</span>
+          </div>
+        </div>
+
+        <!--formModel test-->
+        <!--<p *ngIf="!userData.valid && userData.touched">-->
+        <!--Entered value is invalid-->
+        <!--</p>-->
+
+
+        <div class="form-group">
+          <label for="secret">Secret Questions</label>
+          <select id="secret"
+                  class="form-control"
+                  name="secret"
+                  [ngModel]="defaultQuestion">
+            <option value="pet">Your first Pet?</option>
+            <option value="teacher">Your first teacher?</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <textarea name="questionAnswer"
+                    cols="80"
+                    rows="3"
+                    [(ngModel)]="answer"
+                    required></textarea>
+        </div>
+
+        <div class="radio" *ngFor="let gender of genders">
+          <label>
+            <input type="radio"
+                   required
+                   name="gender"
+                   ngModel
+                   [value]="gender">
+            {{gender}}
+          </label>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid" >Submit</button>
+      </form>
+      <h3 class="alert alert-success" *ngIf = "submitStatus"> Thank you for joining us!!</h3>
+    </div>
+  </div>
+
+  <br>
+  <hr>
+  <div class="row answer" *ngIf = "submitStatus">
+    <div class="col-md-12">
+      <h3>User details</h3>
+      <p>Username: {{user.name}}</p>
+      <p>Mail: {{user.email}}</p>
+      <p>Secret Question: {{user.secretQuestion}}</p>
+      <p>Answer: {{user.answer}}</p>
+      <p>Gender: {{user.gender}}</p>
+
+    </div>
+  </div>
+
+
+</div>

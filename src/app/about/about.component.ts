@@ -1,26 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import{Router} from '@angular/router';  
-import { ActivatedRoute } from '@angular/router/';
-import { DataService } from '../data.service';
+import {Component} from '@angular/core';
+import {ViewChild} from '@angular/core';
+
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })
-export class AboutComponent implements OnInit {
-goals :any;
-  constructor(private route:ActivatedRoute, private router: Router, private _data:DataService) {
-    this.route.params.subscribe(res => console.log(res.id));
-   }
+export class AboutComponent {
 
-  ngOnInit() {
-this._data.goal.subscribe(res=>this.goals = res)
+  @ViewChild('f') signUpForm: NgForm;
+  defaultQuestion = 'pet';
+  answer = '';
+  genders = ['male', 'female'];
+  user = {
+    name: '',
+    email: '',
+    secretQuestion: '',
+    answer: '',
+    gender: ''
+  }
+  submitStatus: Boolean = false;
+
+
+  suggestUserName() {
+    const suggestedName = 'Superuser';
+    this.signUpForm.form.patchValue({
+      userData: {
+        name: suggestedName
+      }
+    });
   }
 
+  // onSubmit(form: HTMLFontElement) {
+  //   console.log(form);
+  // }
 
-  sendMeHome(){
-this.router.navigate(['']);
+  onSubmit() {
+    this.submitStatus = true;
+    this.user.name = this.signUpForm.value.userData.name;
+    this.user.email = this.signUpForm.value.userData.email;
+    this.user.secretQuestion = this.signUpForm.value.secret;
+    this.user.answer = this.signUpForm.value.questionAnswer;
+    this.user.gender = this.signUpForm.value.gender;
+
 
   }
 }
